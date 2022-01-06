@@ -1,0 +1,13 @@
+version: '3'
+services:
+    mongo:
+      image: mongo:4.2
+      ports:
+        - 27017:27017
+    
+    API: 
+      image: kausachan/api 
+      ports:
+        - 3001:3001
+      depends_on:
+        - mongo
