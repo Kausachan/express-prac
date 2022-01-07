@@ -22,14 +22,14 @@ router.get('*', (req, res) => {
             dummy = {...i.toObject()}
             file_data.push(dummy)
         }
-        if(!!description !== false){
+        if(!!description !== false && description !== 'true'){
             for(let i of file_data){
                 if(i["Description"] === description){ 
                     obj = {...i}
                     break
                 }
             }
-    
+
             if(qty === 'true'){
                 flag = 0
                 new_obj['Qty'] = obj['Qty']
@@ -69,6 +69,16 @@ router.get('*', (req, res) => {
         }
         else{
             for(let i of file_data){
+
+                //description
+                if(description === 'true'){
+                    if('Description' in no_desc_obj){
+                        no_desc_obj['Description'].push(i['Description'])
+                    }
+                    else{
+                        no_desc_obj['Description'] = [i['Description']]
+                    }
+                }
 
                 // qty
                 if(qty === 'true'){
